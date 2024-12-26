@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <header>
+        <h1>Your Shopping Cart</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="consoles.html">Consoles</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <table id="cartTable">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <button id="clearCart">Clear Cart</button>
+    </main>
+    <footer>
+        <p>&copy; 2024 Zero Gaming Store. All rights reserved.</p>
+    </footer>
+    <script>
+        const cartTableBody = document.querySelector("#cartTable tbody");
+        const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+        cartItems.forEach((item) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `<td>${item.name}</td><td>$${item.price}</td>`;
+            cartTableBody.appendChild(row);
+        });
+
+        document.getElementById("clearCart").addEventListener("click", () => {
+            localStorage.removeItem("cartItems");
+            alert("Cart cleared!");
+            location.reload();
+        });
+    </script>
+</body>
+</html>
